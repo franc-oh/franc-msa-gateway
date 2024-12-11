@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="DEBUG">
+    <Properties>
+        <Property name="BASE_PATH">logs</Property>
+        <Property name="SERVICE_NAME">franc-msa-gateway</Property>
+        <Property name="LOG_PATTERN">%d{HH:mm:ss.SSSZ} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <!-- 콘솔 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- 파일  -->
+        <RollingFile name ="RollingFile">
+            <FileName>${BASE_PATH}/${SERVICE_NAME}.txt</FileName>
+            <FilePattern>${BASE_PATH}/%d{yyyy-MM-dd-hh-mm}/${SERVICE_NAME}.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name ="RollingFileError">
+            <FileName>${BASE_PATH}/${SERVICE_NAME}_error.txt</FileName>
+            <FilePattern>${BASE_PATH}/%d{yyyy-MM-dd-hh-mm}/${SERVICE_NAME}_error.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <loggers>
+        <root level="INFO" additivity="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="RollingFileError" level = "ERROR"/>
+        </root>
+    </loggers>
+</Configuration>

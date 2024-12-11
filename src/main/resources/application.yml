@@ -1,0 +1,64 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /franc/api
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: franc-gateway
+  main:
+    web-application-type: reactive
+  output:
+    ansi:
+      enabled: always
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  web:
+    resources:
+      add-mappings: false
+  cloud:
+    # 게이트웨이 설정
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: franc-user
+          uri: lb://FRANC-USER
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: CustomFilter
+              args:
+                baseMessage: CustomFilter target!!
+                preLogger: true
+                postLogger: true
+        - id: franc-order
+          uri: lb://FRANC-ORDER
+          predicates:
+            - Path=/orders/**
+
+
+# 유레카 설정
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+logging:
+  config: classpath:log4j2.xml

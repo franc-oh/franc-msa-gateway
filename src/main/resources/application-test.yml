@@ -1,0 +1,28 @@
+spring:
+  config:
+    activate:
+      on-profile: "test"
+
+# 유레카 설정
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8760/franc/discovery/eureka #Eureka Server 명시
+
+logging:
+  level:
+    root: INFO
+    com.zaxxer.hikari.pool.HikariPool: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+    jdbc:
+      sqlonly: OFF
+      sqltiming: INFO
+      resultsettable: INFO
+      audit: OFF
+      resultset: OFF
+      connection: OFF
