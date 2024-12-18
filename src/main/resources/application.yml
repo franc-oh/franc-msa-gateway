@@ -30,10 +30,6 @@ spring:
     gateway:
       default-filters:
         - name: GlobalFilter
-          args:
-            baseMessage: Spring Cloud Gateway GlobalFilter
-            preLogger: true
-            postLogger: true
       routes:
         - id: franc-user
           uri: lb://FRANC-USER
@@ -42,9 +38,11 @@ spring:
           filters:
             - name: CustomFilter
               args:
-                baseMessage: CustomFilter target!!
-                preLogger: true
-                postLogger: true
+                requestHeader: CustomFilter Start!
+                responseHeader : CustomFilter Finish!
+                canRequestHeader: true
+                canResponseHeader: true
+
 #        - id: franc-order
 #          uri: lb://FRANC-ORDER
 #          predicates:
