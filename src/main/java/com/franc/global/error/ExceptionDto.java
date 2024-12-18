@@ -2,8 +2,9 @@ package com.franc.global.error;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.ToString;
 
-@Getter
+@Getter @ToString
 public class ExceptionDto {
     @NotNull
     private final Integer code;

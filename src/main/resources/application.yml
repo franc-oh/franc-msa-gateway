@@ -38,17 +38,17 @@ spring:
         - id: franc-user
           uri: lb://FRANC-USER
           predicates:
-            - Path=/users/**
+            - Path=/franc/api/users/**
           filters:
             - name: CustomFilter
               args:
                 baseMessage: CustomFilter target!!
                 preLogger: true
                 postLogger: true
-        - id: franc-order
-          uri: lb://FRANC-ORDER
-          predicates:
-            - Path=/orders/**
+#        - id: franc-order
+#          uri: lb://FRANC-ORDER
+#          predicates:
+#            - Path=/orders/**
 
 
 # 유레카 설정

@@ -11,12 +11,18 @@ eureka:
     service-url:
       defaultZone: http://localhost:8760/franc/discovery/eureka #Eureka Server 명시
 
+
+
+
+
 logging:
   level:
     root: INFO
     com.zaxxer.hikari.pool.HikariPool: INFO
     org:
       springframework:
+        cloud:
+          gateway: DEBUG
         boot:
           autoconfigure: ERROR
     jdbc:
