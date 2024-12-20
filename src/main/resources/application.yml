@@ -42,6 +42,10 @@ spring:
                 responseHeader : CustomFilter Finish!
                 canRequestHeader: true
                 canResponseHeader: true
+        - id: franc-catalog
+          uri: lb://FRANC-CATALOG
+          predicates:
+            - Path=/franc/api/catalogs/**
 
 #        - id: franc-order
 #          uri: lb://FRANC-ORDER
