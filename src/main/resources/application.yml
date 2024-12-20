@@ -46,11 +46,10 @@ spring:
           uri: lb://FRANC-CATALOG
           predicates:
             - Path=/franc/api/catalogs/**
-
-#        - id: franc-order
-#          uri: lb://FRANC-ORDER
-#          predicates:
-#            - Path=/orders/**
+        - id: franc-order
+          uri: lb://FRANC-ORDER
+          predicates:
+            - Path=/franc/api/orders/**
 
 
 # 유레카 설정
